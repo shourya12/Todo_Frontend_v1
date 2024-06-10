@@ -1,3 +1,4 @@
+
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { MdDelete } from "react-icons/md";
@@ -31,7 +32,10 @@ const TaskItem = ({ task, onTaskUpdated, onTaskDeleted }) => {
 
     return (
         <div className="task-item bg-[#2b2b2b] p-6 rounded-xl shadow-lg border border-[#3e3e3e] relative w-11/12 max-w-3xl m-4 flex flex-col">
-            <div className="label text-[#ffdf91] font-bold text-xl">{task.label}</div>
+            <div className="task-header flex justify-between items-center">
+                <div className="label text-[#ffdf91] font-bold text-xl">{task.label}</div>
+                <div className="date text-[#cebea4] text-sm italic">{task.dueDate}</div>
+            </div>
             <div className="description mt-4 text-[#e0e0e0] flex-grow" style={{ maxHeight: '8em', overflowY: 'auto', wordWrap: 'break-word' }}>
                 {task.description}
             </div>
@@ -42,8 +46,7 @@ const TaskItem = ({ task, onTaskUpdated, onTaskDeleted }) => {
                 <button className="mark-btn p-2" onClick={() => handleToggleCompleted(task)}>
                     {task.completed ? 
                         <BsCheckCircle className="text-green-400 text-2xl" /> :
-                        <div className="border-2 border-[#ff5631] rounded-full w-6 h-6 flex items-center justify-center">
-                        </div>
+                        <div className="border-2 border-[#ff5631] rounded-full w-6 h-6 flex items-center justify-center"></div>
                     }
                 </button>
             </div>
@@ -57,6 +60,7 @@ TaskItem.propTypes = {
         label: PropTypes.string.isRequired,
         description: PropTypes.string,
         completed: PropTypes.bool.isRequired,
+        dueDate: PropTypes.string.isRequired,
     }).isRequired,
     onTaskUpdated: PropTypes.func.isRequired,
     onTaskDeleted: PropTypes.func.isRequired,
